@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthPilot | Your Financial Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <h1 class="logo" id="wealthPilotLogo">Wealth<span class="logo-pilot">Pilot</span></h1>
+                <div class="logo-subtitle">Navigate Your Financial Journey</div>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name">William Mark</div>
+                    <div class="user-status">
+                        <span class="status-indicator"></span>
+                        <span>Premium Member</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li class="nav-item active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="nav-item" data-section="income">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Income & Taxes</span>
+                </li>
+                <li class="nav-item" data-section="expenses">
+                    <i class="fas fa-wallet"></i>
+                    <span>Expense Planner</span>
+                </li>
+                <li class="nav-item" data-section="emi">
+                    <i class="fas fa-credit-card"></i>
+                    <span>EMI Planner</span>
+                </li>
+                <li class="nav-item" data-section="stocks">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Stock Analyst</span>
+                </li>
+                <li class="nav-item" data-section="trip">
+                    <i class="fas fa-plane"></i>
+                    <span>Trip Planner</span>
+                </li>
+                <li class="nav-item" data-section="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Theme</span>
+                </div>
+                <div class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section class="content-section active" id="dashboard">
+                <h2 class="section-title shining">Dashboard Overview</h2>
+                <div class="dashboard-grid">
+                    <div class="card net-worth-card">
+                        <div class="card-header">
+                            <h3>Net Worth</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-sync-alt refresh-btn"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="net-worth-value">$245,876.90</div>
+                            <div class="net-worth-change positive">
+                                <i class="fas fa-arrow-up"></i> 12.5% this month
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="netWorthChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card asset-allocation-card">
+                        <div class="card-header">
+                            <h3>Asset Allocation</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container pie-chart">
+                                <canvas id="assetAllocationChart"></canvas>
+                            </div>
+                            <div class="asset-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #4e79a7;"></span>
+                                    <span class="legend-label">Stocks</span>
+                                    <span class="legend-value">45%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #f28e2b;"></span>
+                                    <span class="legend-label">Bonds</span>
+                                    <span class="legend-value">20%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #e15759;"></span>
+                                    <span class="legend-label">Real Estate</span>
+                                    <span class="legend-value">25%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #76b7b2;"></span>
+                                    <span class="legend-label">Cash</span>
+                                    <span class="legend-value">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card quick-stats-card">
+                        <div class="card-header">
+                            <h3>Quick Stats</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Monthly Income</div>
+                                    <div class="stat-value">$8,750.00</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Monthly Expenses</div>
+                                    <div class="stat-value">$4,230.50</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Savings Rate</div>
+                                    <div class="stat-value">32.4%</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <div class="stat-label">Goals Progress</div>
+                                    <div class="stat-value">68%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card recent-transactions-card">
+                        <div class="card-header">
+                            <h3>Recent Transactions</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="transactions-list">
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-shopping-bag"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Amazon Purchase</div>
+                                        <div class="transaction-date">Today, 3:45 PM</div>
+                                    </div>
+                                    <div class="transaction-amount negative">-$89.99</div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Salary Deposit</div>
+                                        <div class="transaction-date">Jun 1, 9:00 AM</div>
+                                    </div>
+                                    <div class="transaction-amount positive">+$8,750.00</div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Mortgage Payment</div>
+                                        <div class="transaction-date">May 30, 12:00 PM</div>
+                                    </div>
+                                    <div class="transaction-amount negative">-$2,350.00</div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="transaction-icon">
+                                        <i class="fas fa-utensils"></i>
+                                    </div>
+                                    <div class="transaction-details">
+                                        <div class="transaction-name">Dinner Out</div>
+                                        <div class="transaction-date">May 28, 8:30 PM</div>
+                                    </div>
+                                    <div class="transaction-amount negative">-$65.40</div>
+                                </div>
+                            </div>
+                            <div class="view-all-transactions">
+                                <a href="#">View All Transactions <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Income & Taxes Section -->
+            <section class="content-section" id="income">
+                <h2 class="section-title shining">Income & Tax Calculator</h2>
+                <div class="income-grid">
+                    <div class="card income-calculator-card">
+                        <div class="card-header">
+                            <h3>Salary Calculator</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="incomeForm">
+                                <div class="form-group">
+                                    <label for="grossSalary">Gross Annual Salary ($)</label>
+                                    <input type="number" id="grossSalary" class="form-input" placeholder="Enter your gross salary" value="120000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <select id="state" class="form-input">
+                                        <option value="CA">California</option>
+                                        <option value="NY">New York</option>
+                                        <option value="TX">Texas</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="IL">Illinois</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filingStatus">Filing Status</label>
+                                    <select id="filingStatus" class="form-input">
+                                        <option value="single">Single</option>
+                                        <option value="married_joint">Married Filing Jointly</option>
+                                        <option value="married_separate">Married Filing Separately</option>
+                                        <option value="head">Head of Household</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="payFrequency">Pay Frequency</label>
+                                    <select id="payFrequency" class="form-input">
+                                        <option value="monthly">Monthly</option>
+                                        <option value="biweekly">Bi-Weekly</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="annually">Annually</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-calculate">Calculate <i class="fas fa-calculator"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card tax-results-card">
+                        <div class="card-header">
+                            <h3>Tax Breakdown</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tax-summary">
+                                <div class="tax-summary-item">
+                                    <div class="tax-label">Gross Income</div>
+                                    <div class="tax-value">$120,000.00</div>
+                                </div>
+                                <div class="tax-summary-item">
+                                    <div class="tax-label">Federal Tax</div>
+                                    <div class="tax-value">-$18,000.00</div>
+                                </div>
+                                <div class="tax-summary-item">
+                                    <div class="tax-label">State Tax</div>
+                                    <div class="tax-value">-$7,200.00</div>
+                                </div>
+                                <div class="tax-summary-item">
+                                    <div class="tax-label">Social Security</div>
+                                    <div class="tax-value">-$7,440.00</div>
+                                </div>
+                                <div class="tax-summary-item">
+                                    <div class="tax-label">Medicare</div>
+                                    <div class="tax-value">-$1,740.00</div>
+                                </div>
+                                <div class="tax-summary-item total">
+                                    <div class="tax-label">Net Annual Income</div>
+                                    <div class="tax-value">$85,620.00</div>
+                                </div>
+                                <div class="tax-summary-item monthly">
+                                    <div class="tax-label">Monthly Take-Home</div>
+                                    <div class="tax-value">$7,135.00</div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="taxBreakdownChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card tax-optimization-card">
+                        <div class="card-header">
+                            <h3>Tax Optimization Tips</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tip-item">
+                                <div class="tip-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Maximize 401(k) Contributions</h4>
+                                    <p>You can contribute up to $20,500 annually to reduce taxable income.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Health Savings Account</h4>
+                                    <p>Consider contributing to an HSA for triple tax benefits.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Charitable Donations</h4>
+                                    <p>Donating to qualified charities can provide itemized deductions.</p>
+                                </div>
+                            </div>
+                            <div class="tip-item">
+                                <div class="tip-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="tip-content">
+                                    <h4>Tax-Loss Harvesting</h4>
+                                    <p>Offset capital gains by selling underperforming investments.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expense Planner Section -->
+            <section class="content-section" id="expenses">
+                <h2 class="section-title shining">Expense Planner</h2>
+                <div class="expense-grid">
+                    <div class="card expense-input-card">
+                        <div class="card-header">
+                            <h3>Monthly Budget Planner</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="expenseForm">
+                                <div class="form-group">
+                                    <label for="monthlyIncome">Monthly Net Income ($)</label>
+                                    <input type="number" id="monthlyIncome" class="form-input" placeholder="Enter your monthly income" value="7135">
+                                </div>
+                                <div class="form-group">
+                                    <label for="savingsGoal">Monthly Savings Goal (%)</label>
+                                    <input type="number" id="savingsGoal" class="form-input" placeholder="Enter savings percentage" value="20">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rent">Housing (Rent/Mortgage) ($)</label>
+                                    <input type="number" id="rent" class="form-input" placeholder="Enter housing cost" value="2350">
+                                </div>
+                                <div class="form-group">
+                                    <label for="utilities">Utilities ($)</label>
+                                    <input type="number" id="utilities" class="form-input" placeholder="Enter utilities cost" value="350">
+                                </div>
+                                <div class="form-group">
+                                    <label for="groceries">Groceries ($)</label>
+                                    <input type="number" id="groceries" class="form-input" placeholder="Enter groceries cost" value="600">
+                                </div>
+                                <div class="form-group">
+                                    <label for="transportation">Transportation ($)</label>
+                                    <input type="number" id="transportation" class="form-input" placeholder="Enter transportation cost" value="450">
+                                </div>
+                                <div class="form-group">
+                                    <label for="entertainment">Entertainment ($)</label>
+                                    <input type="number" id="entertainment" class="form-input" placeholder="Enter entertainment cost" value="300">
+                                </div>
+                                <div class="form-group">
+                                    <label for="other">Other Expenses ($)</label>
+                                    <input type="number" id="other" class="form-input" placeholder="Enter other costs" value="200">
+                                </div>
+                                <button type="submit" class="btn-calculate">Calculate Budget <i class="fas fa-calculator"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card budget-summary-card">
+                        <div class="card-header">
+                            <h3>Budget Summary</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="budget-summary">
+                                <div class="budget-summary-item">
+                                    <div class="budget-label">Total Income</div>
+                                    <div class="budget-value">$7,135.00</div>
+                                </div>
+                                <div class="budget-summary-item">
+                                    <div class="budget-label">Total Expenses</div>
+                                    <div class="budget-value">-$4,250.00</div>
+                                </div>
+                                <div class="budget-summary-item">
+                                    <div class="budget-label">Savings Goal (20%)</div>
+                                    <div class="budget-value">$1,427.00</div>
+                                </div>
+                                <div class="budget-summary-item total">
+                                    <div class="budget-label">Remaining Balance</div>
+                                    <div class="budget-value">$1,458.00</div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="budgetChart"></canvas>
+                            </div>
+                            <div class="budget-recommendations">
+                                <h4>Recommendations</h4>
+                                <ul>
+                                    <li>You're meeting your savings goal! Consider increasing to 25%.</li>
+                                    <li>Your housing costs are 33% of income (recommended: ≤30%).</li>
+                                    <li>You have $1,458 remaining - consider investing 50% of this.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card budget-rules-card">
+                        <div class="card-header">
+                            <h3>Budgeting Rules</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="rule-item">
+                                <div class="rule-header">
+                                    <h4>50/30/20 Rule</h4>
+                                    <div class="rule-percentage">50% | 30% | 20%</div>
+                                </div>
+                                <div class="rule-description">
+                                    <p>Allocate 50% to needs, 30% to wants, and 20% to savings/debt repayment.</p>
+                                    <div class="rule-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-segment needs" style="width: 50%"></div>
+                                            <div class="progress-segment wants" style="width: 30%"></div>
+                                            <div class="progress-segment savings" style="width: 20%"></div>
+                                        </div>
+                                        <div class="progress-labels">
+                                            <span>Needs</span>
+                                            <span>Wants</span>
+                                            <span>Savings</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <div class="rule-header">
+                                    <h4>80/20 Rule</h4>
+                                    <div class="rule-percentage">80% | 20%</div>
+                                </div>
+                                <div class="rule-description">
+                                    <p>Live on 80% of your income and save/invest the remaining 20%.</p>
+                                    <div class="rule-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-segment living" style="width: 80%"></div>
+                                            <div class="progress-segment saving" style="width: 20%"></div>
+                                        </div>
+                                        <div class="progress-labels">
+                                            <span>Living Expenses</span>
+                                            <span>Savings</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <div class="rule-header">
+                                    <h4>70/20/10 Rule</h4>
+                                    <div class="rule-percentage">70% | 20% | 10%</div>
+                                </div>
+                                <div class="rule-description">
+                                    <p>70% for living expenses, 20% for savings, 10% for debt repayment.</p>
+                                    <div class="rule-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-segment living" style="width: 70%"></div>
+                                            <div class="progress-segment saving" style="width: 20%"></div>
+                                            <div class="progress-segment debt" style="width: 10%"></div>
+                                        </div>
+                                        <div class="progress-labels">
+                                            <span>Living</span>
+                                            <span>Savings</span>
+                                            <span>Debt</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EMI Planner Section -->
+            <section class="content-section" id="emi">
+                <h2 class="section-title shining">EMI Planner</h2>
+                <div class="emi-grid">
+                    <div class="card emi-calculator-card">
+                        <div class="card-header">
+                            <h3>EMI Calculator</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="emiForm">
+                                <div class="form-group">
+                                    <label for="loanAmount">Loan Amount ($)</label>
+                                    <input type="number" id="loanAmount" class="form-input" placeholder="Enter loan amount" value="250000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="interestRate">Interest Rate (%)</label>
+                                    <input type="number" id="interestRate" class="form-input" placeholder="Enter interest rate" value="3.5" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label for="loanTerm">Loan Term (years)</label>
+                                    <input type="number" id="loanTerm" class="form-input" placeholder="Enter loan term" value="30">
+                                </div>
+                                <div class="form-group">
+                                    <label for="startDate">Start Date</label>
+                                    <input type="date" id="startDate" class="form-input" value="2023-06-01">
+                                </div>
+                                <button type="submit" class="btn-calculate">Calculate EMI <i class="fas fa-calculator"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card emi-results-card">
+                        <div class="card-header">
+                            <h3>EMI Breakdown</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="emi-summary">
+                                <div class="emi-summary-item">
+                                    <div class="emi-label">Monthly Payment</div>
+                                    <div class="emi-value">$1,122.61</div>
+                                </div>
+                                <div class="emi-summary-item">
+                                    <div class="emi-label">Total Interest</div>
+                                    <div class="emi-value">$154,140.60</div>
+                                </div>
+                                <div class="emi-summary-item">
+                                    <div class="emi-label">Total Payment</div>
+                                    <div class="emi-value">$404,140.60</div>
+                                </div>
+                                <div class="emi-summary-item">
+                                    <div class="emi-label">Payoff Date</div>
+                                    <div class="emi-value">May 2053</div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="emiBreakdownChart"></canvas>
+                            </div>
+                            <div class="emi-extra-payment">
+                                <h4>Extra Payment Calculator</h4>
+                                <div class="form-group">
+                                    <label for="extraPayment">Extra Monthly Payment ($)</label>
+                                    <input type="number" id="extraPayment" class="form-input" placeholder="Enter extra payment" value="200">
+                                </div>
+                                <button id="calculateExtra" class="btn-calculate">Calculate Savings <i class="fas fa-calculator"></i></button>
+                                <div class="extra-payment-results">
+                                    <p>Paying an extra $200/month would save you $48,231 in interest and pay off your loan 7 years earlier.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card emi-comparison-card">
+                        <div class="card-header">
+                            <h3>Loan Comparison</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="comparison-chart-container">
+                                <canvas id="loanComparisonChart"></canvas>
+                            </div>
+                            <div class="comparison-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Term</th>
+                                            <th>Rate</th>
+                                            <th>Monthly Payment</th>
+                                            <th>Total Interest</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>15 years</td>
+                                            <td>3.25%</td>
+                                            <td>$1,758.47</td>
+                                            <td>$66,524.60</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20 years</td>
+                                            <td>3.35%</td>
+                                            <td>$1,419.47</td>
+                                            <td>$90,672.80</td>
+                                        </tr>
+                                        <tr class="highlighted">
+                                            <td>30 years</td>
+                                            <td>3.50%</td>
+                                            <td>$1,122.61</td>
+                                            <td>$154,140.60</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="emi-tips">
+                                <h4>EMI Optimization Tips</h4>
+                                <ul>
+                                    <li>Making bi-weekly payments can save interest and shorten the loan term.</li>
+                                    <li>Consider refinancing if rates drop by 1% or more.</li>
+                                    <li>Even small extra payments can significantly reduce total interest.</li>
+                                    <li>Shorter terms have lower rates but higher monthly payments.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stock Analyst Section -->
+            <section class="content-section" id="stocks">
+                <h2 class="section-title shining">Stock Analyst</h2>
+                <div class="stocks-grid">
+                    <div class="card portfolio-summary-card">
+                        <div class="card-header">
+                            <h3>Portfolio Summary</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-sync-alt refresh-btn"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="portfolio-value">
+                                <div class="value-label">Total Portfolio Value</div>
+                                <div class="value-amount">$112,456.78</div>
+                                <div class="value-change positive">
+                                    <i class="fas fa-arrow-up"></i> $2,345.67 (2.13%) today
+                                </div>
+                            </div>
+                            <div class="portfolio-allocation">
+                                <div class="allocation-header">
+                                    <h4>Asset Allocation</h4>
+                                    <div class="allocation-actions">
+                                        <button class="btn-small active">1D</button>
+                                        <button class="btn-small">1W</button>
+                                        <button class="btn-small">1M</button>
+                                        <button class="btn-small">1Y</button>
+                                    </div>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="portfolioAllocationChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="portfolio-performance">
+                                <div class="performance-header">
+                                    <h4>Performance vs Benchmarks</h4>
+                                </div>
+                                <div class="chart-container">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card stock-watchlist-card">
+                        <div class="card-header">
+                            <h3>Stock Watchlist</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-plus add-btn"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="watchlist-search">
+                                <input type="text" placeholder="Search stocks..." class="search-input">
+                                <button class="search-btn"><i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="watchlist-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Symbol</th>
+                                            <th>Price</th>
+                                            <th>Change</th>
+                                            <th>% Change</th>
+                                            <th>Volume</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>AAPL</td>
+                                            <td>$175.43</td>
+                                            <td class="positive">+2.34</td>
+                                            <td class="positive">+1.35%</td>
+                                            <td>45.6M</td>
+                                            <td><i class="fas fa-chart-line"></i> <i class="fas fa-bell"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>MSFT</td>
+                                            <td>$328.39</td>
+                                            <td class="positive">+1.87</td>
+                                            <td class="positive">+0.57%</td>
+                                            <td>23.1M</td>
+                                            <td><i class="fas fa-chart-line"></i> <i class="fas fa-bell"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>GOOGL</td>
+                                            <td>$123.45</td>
+                                            <td class="negative">-0.67</td>
+                                            <td class="negative">-0.54%</td>
+                                            <td>18.9M</td>
+                                            <td><i class="fas fa-chart-line"></i> <i class="fas fa-bell"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>AMZN</td>
+                                            <td>$125.67</td>
+                                            <td class="positive">+3.21</td>
+                                            <td class="positive">+2.62%</td>
+                                            <td>32.4M</td>
+                                            <td><i class="fas fa-chart-line"></i> <i class="fas fa-bell"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>TSLA</td>
+                                            <td>$256.78</td>
+                                            <td class="negative">-5.43</td>
+                                            <td class="negative">-2.07%</td>
+                                            <td>78.3M</td>
+                                            <td><i class="fas fa-chart-line"></i> <i class="fas fa-bell"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card stock-details-card">
+                        <div class="card-header">
+                            <h3>AAPL - Apple Inc.</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="stock-header">
+                                <div class="stock-price">
+                                    <div class="price">$175.43</div>
+                                    <div class="change positive">+2.34 (+1.35%)</div>
+                                </div>
+                                <div class="stock-meta">
+                                    <div class="meta-item">
+                                        <span class="meta-label">Market Cap</span>
+                                        <span class="meta-value">$2.75T</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="meta-label">PE Ratio</span>
+                                        <span class="meta-value">28.76</span>
+                                    </div>
+                                    <div class="meta-item">
+                                        <span class="meta-label">Dividend Yield</span>
+                                        <span class="meta-value">0.55%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stock-chart-container">
+                                <canvas id="stockDetailChart"></canvas>
+                            </div>
+                            <div class="stock-info-tabs">
+                                <div class="tabs-header">
+                                    <div class="tab active" data-tab="overview">Overview</div>
+                                    <div class="tab" data-tab="financials">Financials</div>
+                                    <div class="tab" data-tab="news">News</div>
+                                    <div class="tab" data-tab="analysis">Analysis</div>
+                                </div>
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="overview">
+                                        <p>Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple TV, Apple Watch, Beats products, and HomePod.</p>
+                                        <div class="key-metrics">
+                                            <h5>Key Metrics</h5>
+                                            <div class="metrics-grid">
+                                                <div class="metric-item">
+                                                    <span class="metric-label">52 Week Range</span>
+                                                    <span class="metric-value">$124.17 - $198.23</span>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <span class="metric-label">Beta</span>
+                                                    <span class="metric-value">1.28</span>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <span class="metric-label">EPS</span>
+                                                    <span class="metric-value">$6.10</span>
+                                                </div>
+                                                <div class="metric-item">
+                                                    <span class="metric-label">Revenue</span>
+                                                    <span class="metric-value">$394.33B</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content" id="financials">
+                                        <p>Financial data would be displayed here.</p>
+                                    </div>
+                                    <div class="tab-content" id="news">
+                                        <p>News articles would be displayed here.</p>
+                                    </div>
+                                    <div class="tab-content" id="analysis">
+                                        <p>Analyst ratings and predictions would be displayed here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card stock-news-card">
+                        <div class="card-header">
+                            <h3>Market News</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-sync-alt refresh-btn"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="news-item">
+                                <div class="news-header">
+                                    <div class="news-source">Bloomberg</div>
+                                    <div class="news-time">2 hours ago</div>
+                                </div>
+                                <div class="news-title">Fed Signals More Rate Hikes Coming Despite Banking Turmoil</div>
+                                <div class="news-summary">Federal Reserve officials signaled they're not done raising interest rates despite recent banking sector stress, with Chair Jerome Powell emphasizing...</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-header">
+                                    <div class="news-source">CNBC</div>
+                                    <div class="news-time">4 hours ago</div>
+                                </div>
+                                <div class="news-title">Tech Stocks Rally as AI Optimism Outweighs Rate Concerns</div>
+                                <div class="news-summary">Major technology stocks led market gains Thursday as enthusiasm about artificial intelligence applications overshadowed concerns about...</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-header">
+                                    <div class="news-source">Wall Street Journal</div>
+                                    <div class="news-time">6 hours ago</div>
+                                </div>
+                                <div class="news-title">Apple Unveils Vision Pro Headset at WWDC, Shares Rise 2%</div>
+                                <div class="news-summary">Apple Inc. introduced its long-anticipated mixed-reality headset called Vision Pro at its annual developer conference, sending its shares higher...</div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-header">
+                                    <div class="news-source">Reuters</div>
+                                    <div class="news-time">8 hours ago</div>
+                                </div>
+                                <div class="news-title">Tesla Shares Drop After Recall Announcement</div>
+                                <div class="news-summary">Tesla Inc shares fell nearly 3% in premarket trading after the electric vehicle maker announced a recall of over 16,000 Model S and Model X vehicles...</div>
+                            </div>
+                            <div class="view-all-news">
+                                <a href="#">View All News <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trip Planner Section -->
+            <section class="content-section" id="trip">
+                <h2 class="section-title shining">Trip Planner</h2>
+                <div class="trip-grid">
+                    <div class="card trip-create-card">
+                        <div class="card-header">
+                            <h3>Create New Trip</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="tripForm">
+                                <div class="form-group">
+                                    <label for="tripName">Trip Name</label>
+                                    <input type="text" id="tripName" class="form-input" placeholder="e.g., Summer Europe Vacation">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tripDates">Trip Dates</label>
+                                    <div class="date-range">
+                                        <input type="date" id="tripStartDate" class="form-input">
+                                        <span>to</span>
+                                        <input type="date" id="tripEndDate" class="form-input">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tripBudget">Total Budget ($)</label>
+                                    <input type="number" id="tripBudget" class="form-input" placeholder="Enter total budget" value="5000">
+                                </div>
+                                <div class="form-group">
+                                    <label>Trip Members</label>
+                                    <div class="trip-members-input">
+                                        <input type="text" id="memberName" class="form-input" placeholder="Name">
+                                        <input type="email" id="memberEmail" class="form-input" placeholder="Email">
+                                        <input type="tel" id="memberPhone" class="form-input" placeholder="Phone">
+                                        <button type="button" id="addMember" class="btn-add"><i class="fas fa-plus"></i> Add</button>
+                                    </div>
+                                    <div class="trip-members-list">
+                                        <div class="member-item">
+                                            <div class="member-info">
+                                                <span class="member-name">John Doe</span>
+                                                <span class="member-email">john@example.com</span>
+                                                <span class="member-phone">(555) 123-4567</span>
+                                            </div>
+                                            <button class="btn-remove-member"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-create-trip">Create Trip <i class="fas fa-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card trip-active-card">
+                        <div class="card-header">
+                            <h3>Active Trips</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="trip-item active">
+                                <div class="trip-header">
+                                    <h4>Summer Europe Vacation</h4>
+                                    <div class="trip-dates">Jun 15 - Jul 5, 2023</div>
+                                </div>
+                                <div class="trip-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span>$3,250 spent</span>
+                                        <span>$5,000 budget</span>
+                                    </div>
+                                </div>
+                                <div class="trip-members">
+                                    <div class="members-count">
+                                        <i class="fas fa-users"></i> 4 members
+                                    </div>
+                                    <div class="members-avatars">
+                                        <div class="member-avatar">JD</div>
+                                        <div class="member-avatar">SM</div>
+                                        <div class="member-avatar">AL</div>
+                                        <div class="member-avatar">+1</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="trip-item">
+                                <div class="trip-header">
+                                    <h4>Weekend Ski Trip</h4>
+                                    <div class="trip-dates">Jan 20 - Jan 22, 2023</div>
+                                </div>
+                                <div class="trip-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span>$1,200 spent</span>
+                                        <span>$1,200 budget</span>
+                                    </div>
+                                </div>
+                                <div class="trip-members">
+                                    <div class="members-count">
+                                        <i class="fas fa-users"></i> 6 members
+                                    </div>
+                                    <div class="members-avatars">
+                                        <div class="member-avatar">JD</div>
+                                        <div class="member-avatar">SM</div>
+                                        <div class="member-avatar">AL</div>
+                                        <div class="member-avatar">+3</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="trip-item">
+                                <div class="trip-header">
+                                    <h4>Family Beach Holiday</h4>
+                                    <div class="trip-dates">Aug 5 - Aug 12, 2023</div>
+                                </div>
+                                <div class="trip-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 30%"></div>
+                                    </div>
+                                    <div class="progress-labels">
+                                        <span>$900 spent</span>
+                                        <span>$3,000 budget</span>
+                                    </div>
+                                </div>
+                                <div class="trip-members">
+                                    <div class="members-count">
+                                        <i class="fas fa-users"></i> 5 members
+                                    </div>
+                                    <div class="members-avatars">
+                                        <div class="member-avatar">JD</div>
+                                        <div class="member-avatar">SM</div>
+                                        <div class="member-avatar">AL</div>
+                                        <div class="member-avatar">+2</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card trip-detail-card">
+                        <div class="card-header">
+                            <h3>Summer Europe Vacation</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="trip-overview">
+                                <div class="overview-item">
+                                    <div class="overview-label">Dates</div>
+                                    <div class="overview-value">Jun 15 - Jul 5, 2023 (20 days)</div>
+                                </div>
+                                <div class="overview-item">
+                                    <div class="overview-label">Budget</div>
+                                    <div class="overview-value">$5,000 ($250/day)</div>
+                                </div>
+                                <div class="overview-item">
+                                    <div class="overview-label">Spent</div>
+                                    <div class="overview-value">$3,250 (65%)</div>
+                                </div>
+                                <div class="overview-item">
+                                    <div class="overview-label">Remaining</div>
+                                    <div class="overview-value">$1,750 ($116.67/day)</div>
+                                </div>
+                            </div>
+                            <div class="trip-expenses-chart">
+                                <canvas id="tripExpensesChart"></canvas>
+                            </div>
+                            <div class="trip-members-expenses">
+                                <h4>Members' Expenses</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Member</th>
+                                            <th>Spent</th>
+                                            <th>Share</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>John Doe</td>
+                                            <td>$1,250.00</td>
+                                            <td>$812.50</td>
+                                            <td class="positive">+$437.50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sarah Miller</td>
+                                            <td>$800.00</td>
+                                            <td>$812.50</td>
+                                            <td class="negative">-$12.50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alex Lee</td>
+                                            <td>$700.00</td>
+                                            <td>$812.50</td>
+                                            <td class="negative">-$112.50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emily Chen</td>
+                                            <td>$500.00</td>
+                                            <td>$812.50</td>
+                                            <td class="negative">-$312.50</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="settlement-note">
+                                    <p>John should receive $437.50 total from other members to settle balances.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card trip-chat-card">
+                        <div class="card-header">
+                            <h3>Trip Chat</h3>
+                            <div class="card-actions">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chat-container">
+                                <div class="chat-messages">
+                                    <div class="message received">
+                                        <div class="message-sender">Sarah Miller</div>
+                                        <div class="message-content">Hey everyone, I just booked our flights to Paris! Total was $1200 for all four of us.</div>
+                                        <div class="message-time">Jun 1, 10:30 AM</div>
+                                    </div>
+                                    <div class="message sent">
+                                        <div class="message-sender">You</div>
+                                        <div class="message-content">Great! I'll add that to our trip expenses. I'll cover my share when we meet up.</div>
+                                        <div class="message-time">Jun 1, 10:32 AM</div>
+                                    </div>
+                                    <div class="message received">
+                                        <div class="message-sender">Alex Lee</div>
+                                        <div class="message-content">I found a nice Airbnb in Barcelona for €120/night. Should I book it for 4 nights?</div>
+                                        <div class="message-time">Jun 1, 11:15 AM</div>
+                                    </div>
+                                    <div class="message received">
+                                        <div class="message-sender">Emily Chen</div>
+                                        <div class="message-content">That sounds perfect! Let's split the cost equally.</div>
+                                        <div class="message-time">Jun 1, 11:20 AM</div>
+                                    </div>
+                                </div>
+                                <div class="chat-input">
+                                    <input type="text" placeholder="Type your message...">
+                                    <button class="btn-send"><i class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
