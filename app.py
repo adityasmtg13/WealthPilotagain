@@ -33,11 +33,11 @@ user_data = {
         }
     },
     "watchlist": [
-        {"symbol": "AAPL", "price": 175.43, "change": 2.34, "change_percent": 1.35, "volume": "45.6M"},
-        {"symbol": "MSFT", "price": 328.39, "change": 1.87, "change_percent": 0.57, "volume": "23.1M"},
-        {"symbol": "GOOGL", "price": 123.45, "change": -0.67, "change_percent": -0.54, "volume": "18.9M"},
-        {"symbol": "AMZN", "price": 125.67, "change": 3.21, "change_percent": 2.62, "volume": "32.4M"},
-        {"symbol": "TSLA", "price": 256.78, "change": -5.43, "change_percent": -2.07, "volume": "78.3M"}
+        {"symbol": "RELIANCE", "price": 2856.15, "change": 42.25, "change_percent": 1.50, "volume": "3.2M"},
+        {"symbol": "TCS", "price": 3945.70, "change": -12.30, "change_percent": -0.31, "volume": "1.8M"},
+        {"symbol": "HDFCBANK", "price": 1487.65, "change": 22.40, "change_percent": 1.53, "volume": "2.1M"},
+        {"symbol": "INFY", "price": 1542.30, "change": 8.75, "change_percent": 0.57, "volume": "1.5M"},
+        {"symbol": "BHARTIARTL", "price": 1156.90, "change": -5.20, "change_percent": -0.45, "volume": "1.3M"}
     ],
     "trips": [
         {
@@ -92,6 +92,34 @@ def get_watchlist():
 
 @app.route('/api/stock/<symbol>', methods=['GET'])
 def get_stock(symbol):
+    indian_stocks = {
+        "RELIANCE": {
+            "name": "Reliance Industries Ltd",
+            "price": 2856.15,
+            "change": 42.25,
+            "change_percent": 1.50,
+            "market_cap": "15.75T",
+            "pe_ratio": 24.76,
+            "dividend_yield": 0.45,
+            "week52_high": 2950.23,
+            "week52_low": 2241.17,
+            "beta": 1.18,
+            "eps": 115.10,
+            "revenue": "6.94T",
+            "description": "Reliance Industries Limited is an Indian multinational conglomerate company, headquartered in Mumbai. Its businesses include energy, petrochemicals, natural gas, retail, telecommunications, mass media, and textiles.",
+            "chart_data": {
+                "labels": ["9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00"],
+                "prices": [2812.50, 2823.20, 2833.80, 2844.50, 2842.20, 2848.80, 2852.20, 2855.50, 2853.30, 2856.60, 2854.40, 2853.30, 2855.45, 2856.15]
+            }
+        },
+        # Add similar entries for other Indian stocks
+    }
+    
+    if symbol in indian_stocks:
+        return jsonify(indian_stocks[symbol])
+    else:
+        return jsonify({"error": "Stock not found"}), 404
+    
     # In a real app, fetch this from a financial API
     sample_data = {
         "AAPL": {
