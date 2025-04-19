@@ -976,8 +976,97 @@ function addTripMember() {
 }
 
 // Initialize calculations on page load
-window.addEventListener('load', function() {
-    calculateTaxes();
-    calculateBudget();
-    calculateEMI();
+// Initialize calculations on page load
+// Financial Chatbot Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatContainer = document.getElementById('chat-container');
+
+    // Initialize with simple greeting
+    addBotMessage("Hello! How can I help you with your finances today?");
+
+    chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const userMessage = chatInput.value.trim();
+        if (!userMessage) return;
+
+        // Add user message
+        addUserMessage(userMessage);
+        chatInput.value = '';
+
+        // Show typing indicator
+        const typingId = showTypingIndicator();
+
+        // Generate response after short delay
+        setTimeout(() => {
+            removeTypingIndicator(typingId);
+            const response = generateResponse(userMessage);
+            addBotMessage(response);
+        }, 800);
+    });
+
+    // Helper functions
+    function addUserMessage(text) {
+        addMessage('user', text);
+    }
+
+    function addBotMessage(text) {
+        addMessage('bot', text);
+    }
+
+    function addMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}`;
+        messageDiv.innerHTML = `
+            <div class="message-sender">${sender === 'user' ? 'You' : 'Assistant'}</div>
+            <div class="message-content">${text}</div>
+            <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+        `;
+        chatContainer.appendChild(messageDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+        const typingId = 'typing-'+Date.now();
+        const typingDiv = document.createElement('div');
+        typingDiv.id = typingId;
+        typingDiv.className = 'message bot typing';
+        typingDiv.innerHTML = `
+            <div class="message-sender">Assistant</div>
+            <div class="message-content">Typing...</div>
+        `;
+        chatContainer.appendChild(typingDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        return typingId;
+    }
+
+    function removeTypingIndicator(id) {
+        const element = document.getElementById(id);
+        if (element) element.remove();
+    }
+
+    function generateResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+        
+        // Only provide detailed responses for specific queries
+        if (message.includes("p/b") || message.includes("price to book")) {
+            return "P/B Ratio (Price-to-Book) compares market value to book value. Below 1 may indicate undervaluation. Formula: Market Price per Share / Book Value per Share.";
+        }
+        else if (message.includes("p/e") || message.includes("price to earn")) {
+            return "P/E Ratio (Price-to-Earnings) compares stock price to earnings per share. A high P/E may mean overvalued or high growth expectations.";
+        }
+        else if (message.includes("face value")) {
+            return "Face Value is the nominal value of a stock set by the company, different from market price.";
+        }
+        else if (message.includes("market cap")) {
+            return "Market Capitalization is total market value of shares. Formula: Share Price × Total Shares.";
+        }
+        else if (message.includes("hello") || message.includes("hi")) {
+            return "Hello! How can I assist you with financial questions today?";
+        }
+        
+        // Default simple response
+        return "I can help explain financial terms like P/E, P/B ratios, or market concepts. What would you like to know?";
+    }
 });
